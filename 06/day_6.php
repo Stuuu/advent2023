@@ -4,18 +4,19 @@ class Solution
 {
     public function run()
     {
+        ini_set('memory_limit','2048M');
         $lines = file('puzzle_inputs.txt', FILE_IGNORE_NEW_LINES);
         // $lines = file('test_puzzle_inputs.txt', FILE_IGNORE_NEW_LINES);
 
         $races = [];
-        foreach ($lines as $line) {
+        foreach ($lines as $line_num => $line) {
             $line = preg_replace('/\s+/', ' ', $line);
             $line = explode(' ', $line);
 
-            foreach ($line as $key => $item) {
-                if ($key === 0) continue;
-                $races[$key][] = $item;
-            }
+            $line = array_slice($line, 1);
+            $value = implode("", $line);
+
+            $races[1][] = $value;
         }
 
         $win_counts_by_race = [];
